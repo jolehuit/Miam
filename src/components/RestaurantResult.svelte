@@ -37,5 +37,5 @@
     <h2 class="text-xl font-semibold">Restaurant trouvé</h2>
     <p><strong>👨‍🍳 Restaurant :</strong> {name}</p>
     <p><strong>📍 Adresse :</strong> {address}</p>
-    <p><strong>⭐️ Note :</strong> {rating}</p>
+    <p><strong>⭐️ Note :</strong> {rating}/5</p>
 </div>
