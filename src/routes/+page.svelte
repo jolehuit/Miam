@@ -23,14 +23,17 @@
 	const foodOptions: AutocompleteOption<string>[] = [
 		{ label: 'Africain', value: 'Africain' },
 		{ label: 'Argentin', value: 'Argentin' },
+		{ label: 'Casher', value: 'Casher' },
 		{ label: 'Chinois', value: 'Chinois' },
 		{ label: 'Coréen', value: 'Coréen' },
 		{ label: 'Français', value: 'Français' },
+		{ label: 'Halal', value: 'Halal' },
 		{ label: 'Indien', value: 'Indien' },
 		{ label: 'Italien', value: 'Italien' },
 		{ label: 'Japonais', value: 'Japonais' },
 		{ label: 'Mexicain', value: 'Mexicain' },
 		{ label: 'Péruvien', value: 'Péruvien' },
+		{ label: 'Vegan', value: 'Vegan' },
 	];
 
 	async function getCurrentPosition() {
