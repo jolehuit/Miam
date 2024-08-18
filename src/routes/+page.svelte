@@ -96,9 +96,40 @@
 				body: JSON.stringify(body)
 			});
 
-			if (response.ok) {
-				const data = await response.json();
-		//		console.log('Données du restaurant:', data); // Ajoutez ce log pour vérifier les données
+			// Si le code de statut n'est pas 200, affiche un message d'erreur
+			if (!response.ok) {
+				const errorText = await response.text();
+				if (response.status === 404) {
+					// Cas spécifique pour "aucun restaurant trouvé"
+					if (minimalRate === maxRate) {
+						toastStore.trigger({
+							message: "Aucun restaurant trouvé. Tu as sélectionné 5/5 comme note minimale, essaye de sélectionner moins !",
+							type: 'info',
+							duration: 5000,
+						});
+					} else {
+						toastStore.trigger({
+							message: "Aucun restaurant trouvé.",
+							type: 'info',
+							duration: 5000,
+						});
+					}
+				} else {
+					console.error('Erreur lors de la recherche des restaurants:', errorText);
+					toastStore.trigger({
+						message: "Une erreur est survenue lors de la recherche du restaurant.",
+						type: 'error',
+						duration: 5000,
+					});
+				}
+				return;
+			}
+
+			// Réponse OK
+			const data = await response.json();
+
+			// Assure-toi que la réponse contient des données valides
+			if (data && data.displayName && data.formattedAddress && data.rating) {
 				modalStore.trigger({
 					type: 'component',
 					component: 'restaurantResult',
@@ -109,25 +140,23 @@
 					}
 				});
 			} else {
-				const errorText = await response.text();
-				console.error('Erreur lors de la recherche des restaurants:', errorText);
+				// Si les données sont présentes mais incomplètes
 				toastStore.trigger({
 					message: "Aucun restaurant trouvé.",
-					type: 'error',
+					type: 'info',
 					duration: 5000,
 				});
 			}
 		} catch (error) {
 			console.error('Erreur lors de l\'envoi de la requête:', error);
-			if (loc) {
-				toastStore.trigger({
-					message: "Une erreur est survenue lors de la recherche du restaurant.",
-					type: 'error',
-					duration: 5000,
-				});
-			}
+			toastStore.trigger({
+				message: "Une erreur est survenue lors de la recherche du restaurant.",
+				type: 'error',
+				duration: 5000,
+			});
 		}
 	}
+
 </script>
 <div class="flex mt-1 items-center justify-center p-3">
 	<div class="bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-xl shadow-lg p-6 lg:p-8 space-y-6 w-full max-w-2xl">
@@ -166,7 +195,6 @@
 			<input class="checkbox" type="checkbox" bind:checked={anyFoodType} id="anyFoodType" />
 			<label for="anyFoodType">Peu importe</label>
 		</div>
-
 		{#if !anyFoodType}
 			<select class="select" placeholder="Sélectionner une valeur" bind:value={foodType}>
 				{#each foodOptions as option}
