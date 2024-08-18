@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { Geolocation } from '@capacitor/geolocation';
 	import {
 		Autocomplete,
@@ -20,6 +21,9 @@
 	let foodType = 'Français';
 	let anyFoodType = false; // Variable d'état pour la case à cocher "Peu importe" et cochée par défaut
 
+	let deferredPrompt: any;
+	let showInstallButton = false;
+
 	const foodOptions: AutocompleteOption<string>[] = [
 		{ label: 'Africain', value: 'Africain' },
 		{ label: 'Argentin', value: 'Argentin' },
@@ -35,6 +39,28 @@
 		{ label: 'Péruvien', value: 'Péruvien' },
 		{ label: 'Vegan', value: 'Vegan' },
 	];
+
+	onMount(() => {
+		window.addEventListener('beforeinstallprompt', (e) => {
+			e.preventDefault();
+			deferredPrompt = e;
+			showInstallButton = true;
+		});
+	});
+
+	async function addToHomeScreen() {
+		if (deferredPrompt) {
+			deferredPrompt.prompt();
+			const { outcome } = await deferredPrompt.userChoice;
+			if (outcome === 'accepted') {
+				console.log('Utilisateur a accepté d\'ajouter à l\'écran d\'accueil');
+			} else {
+				console.log('Utilisateur a refusé d\'ajouter à l\'écran d\'accueil');
+			}
+			deferredPrompt = null;
+			showInstallButton = false;
+		}
+	}
 
 	async function getCurrentPosition() {
 		try {
@@ -214,6 +240,17 @@
 			>
 				🔎 Trouve moi un restaurant !
 			</button>
+		</div>
+		<div class="text-center mt-4">
+			{#if showInstallButton}
+				<button
+						type="button"
+						class="btn bg-white text-blue-600 font-bold py-2 px-4 lg:py-2 lg:px-6 rounded-full transition-transform duration-200 hover:scale-105"
+						on:click={addToHomeScreen}
+				>
+					📱 Ajouter à l'écran d'accueil
+				</button>
+			{/if}
 		</div>
 	</div>
 </div>
