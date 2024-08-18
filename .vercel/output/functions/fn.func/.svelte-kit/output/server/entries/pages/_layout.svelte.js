@@ -428,7 +428,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     header: () => {
       return ` ${validate_component(AppBar, "AppBar").$$render($$result, {}, {}, {
         trail: () => {
-          return `<a class="btn btn-sm variant-ghost-surface" href="https://discord.gg/EXqV7W8MtY" target="_blank" rel="noreferrer" data-svelte-h="svelte-lm4nj8">Suis-nous</a> `;
+          return `<a class="btn btn-sm variant-ghost-surface" href="https://www.google.com/" target="_blank" rel="noreferrer" data-svelte-h="svelte-1c9cgh7">Suis-nous</a> `;
         },
         lead: () => {
           return `<strong class="text-xl uppercase" data-svelte-h="svelte-1qnum3i">Miam!</strong>`;

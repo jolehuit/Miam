@@ -15,5 +15,9 @@
 			"dest": "/fn"
 		}
 	],
-	"overrides": {}
+	"overrides": {
+		"index.html": {
+			"path": ""
+		}
+	}
 }
