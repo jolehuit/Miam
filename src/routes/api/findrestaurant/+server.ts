@@ -13,7 +13,7 @@ export const POST: RequestHandler = async ({ request }) => {
             headers: {
                 'Content-Type': 'application/json',
                 'X-Goog-Api-Key': MAPS_API,
-                'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.rating,places.websiteUri'
+                'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.rating'
             },
             body: JSON.stringify({
                 includedTypes: ["restaurant"],
