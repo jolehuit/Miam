@@ -120,7 +120,7 @@
 				} else {
 					console.error('Erreur lors de la recherche des restaurants:', errorText);
 					toastStore.trigger({
-						message: "Une erreur est survenue lors de la recherche du restaurant.",
+						message: "Aucun restaurant trouvé.",
 						type: 'error',
 						duration: 5000,
 					});
@@ -163,9 +163,9 @@
 </script>
 <div class="flex flex-col mt-1 items-center justify-center p-3">
 	<h1 class="text-center text-2xl w-full mb-5">⏱️ C'est parti pour trouver un restaurant en 30 secondes !</h1>
-	<div class="bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-xl shadow-lg p-6 lg:p-8 space-y-6 w-full max-w-2xl">
+	<div class="bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-xl shadow-lg p-3 lg:p-8 space-y-6 w-full max-w-2xl">
 		<div class="">
-			<h2 class="text-xl lg:text-xl">1. Pour commencer, je dois accéder à ta localisation ! </h2>
+			<h2 class="text-xl lg:text-xl">1. Je dois accéder à ta localisation. </h2>
 			<button
 					type="button"
 					class=" mt-4 btn bg-white text-orange-600 font-medium py-2 px-4 lg:py-2 lg:px-6 rounded-full transition-transform duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
