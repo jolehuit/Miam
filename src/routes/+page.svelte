@@ -161,45 +161,45 @@
 	}
 
 </script>
-<div class="flex mt-1 items-center justify-center p-3">
+<div class="flex flex-col mt-1 items-center justify-center p-3">
+	<h1 class="text-center text-2xl w-full mb-5">⏱️ C'est parti pour trouver un restaurant en 30 secondes !</h1>
 	<div class="bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-xl shadow-lg p-6 lg:p-8 space-y-6 w-full max-w-2xl">
-		<h1 class="text-center text-2xl">👋 Hello, je vais t'aider à trouver un restaurant !</h1>
-		<div class="text-center">
-			<h2 class="text-xl lg:text-2xl font-medium">Où es-tu ?</h2>
+		<div class="">
+			<h2 class="text-xl lg:text-xl">1. Pour commencer, je dois accéder à ta localisation ! </h2>
 			<button
 					type="button"
-					class=" mt-4 btn bg-white text-orange-600 font-bold py-2 px-4 lg:py-2 lg:px-6 rounded-full transition-transform duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+					class=" mt-4 btn bg-white text-orange-600 font-medium py-2 px-4 lg:py-2 lg:px-6 rounded-full transition-transform duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
 					disabled={locationFound}
 					on:click={getCurrentPosition}
 			>
 				{locationFound ? 'Localisation trouvée' : '📍 Donner ma localisation'}
 			</button>
 		</div>
-		<h2 class="text-xl lg:text-2xl font-medium">🚶‍Une distance maximale ?</h2>
+		<h2 class="text-xl lg:text-xl font-medium">2. Une distance maximale ?</h2>
 
 		<RangeSlider name="range-slider" bind:value={radius} max={maxRadius} step={1} class="w-full">
 			<div class="flex justify-between items-center">
-				<div class="font-bold text-lg">Distance maximale</div>
+				<div class="font-medium text-lg">Distance maximale 🚶</div>
 				<div class="text-lg lg:text-lg">{formatDistance(radius)}</div>
 			</div>
 		</RangeSlider>
 
-		<h2 class="text-xl lg:text-2xl font-medium">⭐️ Une note minimale ?</h2>
+		<h2 class="text-xl lg:text-xl font-medium">3. Une note minimale ?</h2>
 
 		<RangeSlider name="range-slider" bind:value={minimalRate} max={maxRate} step={0.1} class="w-full">
 			<div class="flex justify-between items-center">
-				<div class="font-bold text-lg">Note minimale</div>
+				<div class="font-medium text-lg">Note minimale ⭐️</div>
 				<div class="text-lg lg:text-lg">{minimalRate} / {maxRate}</div>
 			</div>
 		</RangeSlider>
 
-		<h2 class="text-xl lg:text-2xl font-medium">😋 Un type de nourriture spécifique ?</h2>
+		<h2 class="text-xl lg:text-xl font-medium">4. Un type de nourriture spécifique ?</h2>
 		<div class="flex items-center space-x-2">
 			<input class="checkbox" type="checkbox" bind:checked={anyFoodType} id="anyFoodType" />
 			<label for="anyFoodType">Peu importe</label>
 		</div>
 		{#if !anyFoodType}
-			<select class="select" placeholder="Sélectionner une valeur" bind:value={foodType}>
+			<select class="select" bind:value={foodType}>
 				{#each foodOptions as option}
 					<option value={option.value}>{option.label}</option>
 				{/each}
