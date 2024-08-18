@@ -62,7 +62,7 @@ export const POST: RequestHandler = async ({ request }) => {
                         }
                     }
                 },
-                pageSize: 10,
+                pageSize: 20,
                 openNow: true
             })
         });

@@ -17,7 +17,7 @@ export const POST: RequestHandler = async ({ request }) => {
             },
             body: JSON.stringify({
                 includedTypes: ["restaurant"],
-                maxResultCount: 10,
+                maxResultCount: 20,
                 locationRestriction: {
                     circle: {
                         center: {
