@@ -130,7 +130,8 @@
 	}
 </script>
 <svelte:head>
-	<title>Miam! - Trouver un restaurant</title>
+	<title>Miam! - Trouvez un restaurant près de chez vous</title>
+	<meta name="title" content="Miam! - Trouvez un restaurant près de chez vous">
 	<meta name="description" content="Trouvez rapidement un restaurant bien noté près de chez vous, selon votre type de cuisine préféré et la note des utilisateurs.">
 </svelte:head>
 <div class="flex mt-1 items-center justify-center p-3">
